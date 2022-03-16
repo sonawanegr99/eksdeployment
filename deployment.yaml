@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: jenkins-devsecops
+  name: eksapp
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -12,20 +12,20 @@ metadata:
     app.kubernetes.io/version: '1.0.0'
     app.kubernetes.io/managed-by: kubectl
   name: jenkins-devsecops-deployment
-  namespace: jenkins-devsecops
+  namespace: eksapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins-devsecops
+      app: eksapp
   template:
     metadata:
       labels:
-        app: jenkins-devsecops
+        app: eksapp
     spec:
       containers:
-        - image: 088585194665.dkr.ecr.ap-south-1.amazonaws.com/devsecops-demo:latest
+        - image: 088585194665.dkr.ecr.ap-south-1.amazonaws.com/opensourcedevsecops:NodeApp2
           imagePullPolicy: Always
-          name: jenkins-devsecops
+          name: eksapp
           ports:
             - containerPort: 4000
